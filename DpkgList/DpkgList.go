@@ -6,6 +6,8 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/jtfogarty/dpkg-es/config"
 )
 
 // PKGDetail is commented
@@ -53,12 +55,22 @@ func Parse(line string) string { //*[]PKGDetail
 	return string(dt2)
 }
 
-func ListPkgs(text string) {
+// ListPkgs is commented
+func ListPkgs(text string, configObj config.Object) {
 	type LinesOfText [][]byte // A slice of byte slices.
 
 	//	var text = "ii  adduser                                  3.113+nmu3ubuntu4                   all          add and remove users and groups"
+	var esUser = configObj.Config.Databases.Elastic01.User
+	var esPW = configObj.Config.Databases.Elastic01.Pass
+	var esHost = configObj.Config.Databases.Elastic01.Host
+	var esPort = configObj.Config.Databases.Elastic01.Port
+	var esIndex = configObj.Config.Databases.Elastic01.Index[0].Name
+	var esMap = configObj.Config.Databases.Elastic01.Index[0].MappingName
+	var curlU = esUser + ":" + esPW
+	var curlURL = esHost + ":" + esPort + "/" + esIndex + "/" + esMap + "/"
+
 	s := string(Parse(text))
-	c := exec.Command("curl", "-u", "Admin:Admin", "http://192.168.1.107:9200/dpkg/dpkg_list/", "-d", s)
+	c := exec.Command("curl", "-u", curlU, curlURL, "-d", s)
 	c.Stdout = os.Stdout
 	c.Stderr = os.Stderr
 	err := c.Run()

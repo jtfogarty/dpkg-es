@@ -1,0 +1,62 @@
+{
+	"config": {
+		"buffer_size": 10,
+		"DDA": {
+			"Definition": {
+				"version": 1,
+				"filename": "dda.json",
+				"path": "/Users/jeff/go-workspace/src/github.com/jtfogarty/usbdda/readFile/"
+			},
+			"Source": {
+				"path": "/Users/jeff/go-workspace/src/github.com/timfogarty1549/jeff/USBank-dda/",
+				"filepattern": "*.dat",
+				"filelist": [
+					"testdda.dat",
+					"src2.dat"
+				],
+				"dirorlist": "dir"
+			},
+			"Target": {
+				"path": "./",
+				"name": "blank.json",
+				"fileorkafka": "file",
+				"kafka": {
+					"server": "192.168.174.128:9092",
+					"topic": "mytopic",
+					"port": 9092
+				}
+			}
+		},
+		"Databases":{ "Elastic01": {
+			"host": "localhost",
+			"port": "9200",
+			"user": "Admin",
+			"pass": "Admin",
+			"type": "elasticsearch",
+			"name": "es01",
+			"Index": [{
+				"name": "dpkg",
+        "mapping_def_encoding": "Base64",
+        "mapping_name":"dpkg_list",
+				"mapping_def": "ew0KICAic2V0dGluZ3MiOiB7DQogICAgIm51bWJlcl9vZl9zaGFyZHMiOiAxLA0KICAgICJtYXBwZXIiOiB7DQogICAgICAiZHluYW1pYyI6IGZhbHNlDQogICAgfQ0KICB9LA0KICAibWFwcGluZ3MiOiB7DQogICAgImRwa2dfbGlzdCI6IHsNCiAgICAgICJkeW5hbWljIjogdHJ1ZSwNCiAgICAgICJwcm9wZXJ0aWVzIjogew0KICAgICAgICAiSG9zdE5hbWUiOiB7DQogICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwgImluZGV4IjogIm5vdF9hbmFseXplZCINCiAgICAgICAgfSwNCiAgICAgICAgIk5hbWUiOiB7DQogICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwgImluZGV4IjogIm5vdF9hbmFseXplZCINCiAgICAgICAgfSwNCiAgICAgICAgIlZlcnNpb24iOiB7DQogICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwgImluZGV4IjogIm5vdF9hbmFseXplZCINCiAgICAgICAgfSwNCiAgICAgICAgIkFyY2hpdGVjdHVyZSI6IHsNCiAgICAgICAgICAidHlwZSI6ICJzdHJpbmciLCAiaW5kZXgiOiAibm90X2FuYWx5emVkIg0KICAgICAgICB9LA0KICAgICAgICAiRGVzY3JpcHRpb24iOiB7DQogICAgICAgICAgInR5cGUiOiAic3RyaW5nIiwgImluZGV4IjogIm5vdF9hbmFseXplZCINCiAgICAgICAgfQ0KICAgICAgfQ0KICAgIH0NCiAgfQ0KfQ=="
+			}]
+		}, "Mysql01": {
+			"host": "localhost",
+			"port": "9200",
+			"user": "root",
+			"pass": "",
+			"type": "mysql",
+			"name": "mysql01",
+			"Tables": [{
+				"name": "testing",
+				"statment": "teststring",
+				"regex": "teststring ([0-9]+) ([A-z]+)",
+				"Types": [{
+					"id": "int",
+					"value": "string"
+				}]
+			}]
+		}
+	}
+}
+}

@@ -85,6 +85,5 @@ func GetConfig() *Object {
 
 	var jsontype Object
 	json.Unmarshal(file, &jsontype)
-	//fmt.Printf("Results: %v\n", jsontype)
 	return &jsontype
 }

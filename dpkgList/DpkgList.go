@@ -2,7 +2,6 @@ package DpkgList
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -26,6 +25,12 @@ type pkgDef struct {
 	} `json:"pkgU"`
 }
 
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
 func parseField(start int, len int, line string) string {
 	return strings.TrimSpace(line[start : start+len])
 }
@@ -40,9 +45,7 @@ func Parse(line string) string { //*[]PKGDetail
 	bytes := []byte(dpkgStruct)
 	//	var start int
 	err := json.Unmarshal(bytes, &p)
-	if err != nil {
-		panic(err)
-	}
+	check(err)
 
 	dt := &PKGDetail{
 		HostName:     host,
@@ -74,7 +77,5 @@ func ListPkgs(text string, configObj config.Object) {
 	c.Stdout = os.Stdout
 	c.Stderr = os.Stderr
 	err := c.Run()
-	if err != nil {
-		fmt.Println(err)
-	}
+	check(err)
 }
